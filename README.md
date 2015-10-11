@@ -1,6 +1,7 @@
 # Hubot
 
 [![Build Status](https://travis-ci.org/yulii/hubot-scripts.svg?branch=master)](https://travis-ci.org/yulii/hubot-scripts)
+[![Dependencies Status](https://david-dm.org/yulii/hubot-scripts.png)](https://david-dm.org/yulii/hubot-scripts)
 
 This is a version of GitHub's Campfire bot, hubot. He's pretty cool.
 
