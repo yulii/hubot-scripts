@@ -6,12 +6,21 @@
 
 module.exports = (robot) ->
 
+  robot.respond /printenv$/i, (msg) ->
+    @child_process = require('child_process')
+    command = 'printenv'
+    @child_process.exec command, (error, stdout, stderr) ->
+      msg.send command
+      msg.send "```#{error}```"  if error?  && error.length  > 0
+      msg.send "```#{stdout}```" if stdout? && stdout.length > 0
+      msg.send "```#{stderr}```" if stderr? && stderr.length > 0
+
   robot.respond /outdated$/i, (msg) ->
     @child_process = require('child_process')
     command = 'npm outdated'
     @child_process.exec command, (error, stdout, stderr) ->
       msg.send command
-      msg.send "```#{error}```"  if error?
-      msg.send "```#{stdout}```" if stdout?
-      msg.send "```#{stderr}```" if stderr?
+      msg.send "```#{error}```"  if error?  && error.length  > 0
+      msg.send "```#{stdout}```" if stdout? && stdout.length > 0
+      msg.send "```#{stderr}```" if stderr? && stderr.length > 0
 
