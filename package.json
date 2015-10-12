@@ -30,10 +30,12 @@
     "hubot-slack":   ">= 3.3.0  < 4.0.0"
   },
   "devDependencies": {
-    "coffee-script":      "^1.10.0",
-    "mocha": "^2.3.3",
-    "chai":  "^1.9.2",
-    "hubot-mock-adapter": "^1.0.0"
+    "blanket":             "^1.1.6",
+    "chai":                "^1.9.2",
+    "coffee-script":       "^1.10.0",
+    "mocha":               "^2.3.3",
+    "mocha-lcov-reporter": "0.0.1",
+    "hubot-mock-adapter":  "^1.0.0"
   },
 
   "engines": {
@@ -41,7 +43,19 @@
     "npm":  ">= 1.1.x"
   },
 
+  "config": {
+    "blanket": {
+      "pattern": [
+        "hubot-scripts/scripts",
+        "hubot-scripts/module"
+      ],
+      "loader": "./node-loaders/coffee-script",
+      "data-cover-never": "node_modules"
+    }
+  },
+
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coveralls": "mocha test --require blanket --reporter mocha-lcov-reporter | coveralls"
   }
 }
