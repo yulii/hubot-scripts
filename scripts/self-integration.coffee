@@ -10,6 +10,14 @@ module.exports = (robot) ->
     @child_process = require('child_process')
     command = 'npm outdated'
     msg.send command
+    @child_process.exec 'pwd', (error, stdout, stderr) ->
+      msg.send error  if error?
+      msg.send stdout if stdout?
+      msg.send stderr if stderr?
+    @child_process.exec 'ls -al', (error, stdout, stderr) ->
+      msg.send error  if error?
+      msg.send stdout if stdout?
+      msg.send stderr if stderr?
     @child_process.exec command, (error, stdout, stderr) ->
       msg.send error  if error?
       msg.send stdout if stdout?
