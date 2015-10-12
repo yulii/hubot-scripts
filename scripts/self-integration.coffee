@@ -11,7 +11,7 @@ module.exports = (robot) ->
     command = 'npm outdated'
     @child_process.exec command, (error, stdout, stderr) ->
       msg.send command
-      msg.send error  if error?
-      msg.send stdout if stdout?
-      msg.send stderr if stderr?
+      msg.send "```#{error}```"  if error?
+      msg.send "```#{stdout}```" if stdout?
+      msg.send "```#{stderr}```" if stderr?
 
