@@ -27,6 +27,11 @@ module.exports = (robot) ->
       msg.send "```#{error}```"  if error?  && error.length  > 0
       msg.send "```#{stdout}```" if stdout? && stdout.length > 0
       msg.send "```#{stderr}```" if stderr? && stderr.length > 0
+    @child_process.exec 'npm help', (error, stdout, stderr) ->
+      msg.send "npm help"
+      msg.send "```#{error}```"  if error?  && error.length  > 0
+      msg.send "```#{stdout}```" if stdout? && stdout.length > 0
+      msg.send "```#{stderr}```" if stderr? && stderr.length > 0
 
   robot.respond /outdated$/i, (msg) ->
     @child_process = require('child_process')
