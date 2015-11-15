@@ -14,6 +14,6 @@ module.exports = (robot) ->
 
   pid = setInterval ->
     return if typeof robot?.send isnt 'function'
-    robot.send {}, "I'm ready."
+    robot.send { room: 'general' }, "I'm ready."
     clearInterval pid
   , 1000
