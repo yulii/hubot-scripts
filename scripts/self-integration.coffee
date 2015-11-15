@@ -15,6 +15,19 @@ module.exports = (robot) ->
       msg.send "```#{stdout}```" if stdout? && stdout.length > 0
       msg.send "```#{stderr}```" if stderr? && stderr.length > 0
 
+  robot.respond /show$/i, (msg) ->
+    @child_process = require('child_process')
+    @child_process.exec 'pwd', (error, stdout, stderr) ->
+      msg.send command
+      msg.send "```#{error}```"  if error?  && error.length  > 0
+      msg.send "```#{stdout}```" if stdout? && stdout.length > 0
+      msg.send "```#{stderr}```" if stderr? && stderr.length > 0
+    @child_process.exec 'ls -ltr', (error, stdout, stderr) ->
+      msg.send command
+      msg.send "```#{error}```"  if error?  && error.length  > 0
+      msg.send "```#{stdout}```" if stdout? && stdout.length > 0
+      msg.send "```#{stderr}```" if stderr? && stderr.length > 0
+
   robot.respond /outdated$/i, (msg) ->
     @child_process = require('child_process')
     command = 'npm outdated'
