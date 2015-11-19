@@ -32,8 +32,8 @@ module.exports = (robot) ->
       msg.send "```#{error}```"  if error?  && error.length  > 0
       msg.send "```#{stdout}```" if stdout? && stdout.length > 0
       msg.send "```#{stderr}```" if stderr? && stderr.length > 0
-    @child_process.exec 'cat /app/.npmrc', (error, stdout, stderr) ->
-      msg.send "cat /app/.npmrc"
+    @child_process.exec 'npm config list', (error, stdout, stderr) ->
+      msg.send "npm config list"
       msg.send "```#{error}```"  if error?  && error.length  > 0
       msg.send "```#{stdout}```" if stdout? && stdout.length > 0
       msg.send "```#{stderr}```" if stderr? && stderr.length > 0
