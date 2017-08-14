@@ -63,8 +63,9 @@ jobs:
             test -z "$(git ls-remote origin ${BRANCH} 2> /dev/null)" && echo "Update branch not found." && exit 0
             git fetch origin ${BRANCH}
             test -z "$(git diff upstream/master...FETCH_HEAD)" && echo "No changes." && exit 0
-            curl -H "Authorization: token ${FORK_REPO_TOKEN}" \
-                 -X POST -H "Content-Type: application/json" \
+            curl -s -X POST \
+                 -H "Authorization: token ${FORK_REPO_TOKEN}" \
+                 -H "Content-Type: application/json" \
                  -d "{ \"title\": \"Yarn upgrade\", \"body\": \"Auto update pull request!\", \"head\": \"yulii-bot:${BRANCH}\", \"base\": \"master\" }" \
                  "https://api.github.com/repos/yulii/hubot-scripts/pulls" \
                  | tee /tmp/create-pull-request.log.json
