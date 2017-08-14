@@ -21,6 +21,8 @@
     "url": "https://github.com/github/hubot.git"
   },
   "dependencies": {
+    "child_process": "^1.0.2",
+    "cron": "^1.2.1",
     "david": "^7.0.0",
     "hubot": ">= 2.16.0 < 3.0.0",
     "hubot-heroku-keepalive": "^1.0.2",

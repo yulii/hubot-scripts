@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+CIRCLE_API_URL="https://circleci.com/api/v1.1/project/${CIRCLE_VCS_TYPE:-github}/${CIRCLE_USERNAME:-yulii}/${CIRCLE_PROJECT}/tree/${CIRCLE_BRANCH:-master}?circle-token=${CIRCLE_TOKEN}"
+CIRCLE_BUILD_PARAMETERS='{ "build_parameters": { "CIRCLE_JOB": "update", "JOB_USER": "'${JOB_USER:-sh}'" } }'
+
+test -z \
+  "$(
+    curl -s -X POST \
+      -H "Content-Type: application/json" \
+      -d "${CIRCLE_BUILD_PARAMETERS}" \
+      "${CIRCLE_API_URL}" \
+    | jq -r 'select(.build_url == null)' \
+  )"
