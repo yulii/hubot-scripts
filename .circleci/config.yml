@@ -7,14 +7,14 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: hubot-script-dependencies-{{ checksum "package-lock.json" }}
+          key: hubot-script-dependencies-{{ checksum "yarn.lock" }}
 
       - run:
           name: Install dependencies
           command: yarn install
 
       - save_cache:
-          key: hubot-script-dependencies-{{ checksum "package-lock.json" }}
+          key: hubot-script-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
 
