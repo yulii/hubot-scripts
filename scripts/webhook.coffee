@@ -18,6 +18,5 @@ module.exports = (robot) ->
   robot.router.post '/webhook', (req, res) ->
     switch true
       when /wake(\s+#{robot.name})?\s+up!/.test(req.body.text)
-        res.end("<!#{req.body.user_name}> Waking <!#{robot.name}> up now. Wait a second.")
-      else
-        res.end()
+        robot.send { room: "#{req.body.channel_id}" }, "<!#{req.body.user_name}> Waking <!#{robot.name}> up now. Wait a second."
+    res.end()
