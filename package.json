@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "child_process": "^1.0.2",
-    "cron": "^1.2.1",
     "david": "^7.0.0",
     "hubot": ">= 2.16.0 < 3.0.0",
     "hubot-scripts": ">= 2.16.0 < 3.0.0",
