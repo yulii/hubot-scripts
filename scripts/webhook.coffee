@@ -18,6 +18,7 @@ child_process = require 'child_process'
 module.exports = (robot) ->
 
   robot.router.post '/webhook', (req, res) ->
+    console.log(req.body.text)
     switch true
       when /@hubot update projects/.test(req.body.text)
         child_process.exec "CIRCLE_PROJECT=yulii.github.io JOB_USER=hubot bin/circleci", (error, stdout, stderr) ->
