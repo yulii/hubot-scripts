@@ -20,7 +20,7 @@ module.exports = (robot) ->
   robot.router.post '/webhook', (req, res) ->
     console.info(req.body)
     switch true
-      when /<@U0C8EL18D> update projects/.test(req.body.text)
+      when /<@U0C8EL18D|hubot> update projects/.test(req.body.text)
         child_process.exec "CIRCLE_PROJECT=yulii.github.io JOB_USER=hubot bin/circleci", (error, stdout, stderr) ->
           if !error
             robot.send { room: "#devops" }, "Kick yulii.github.io update"
@@ -33,7 +33,7 @@ module.exports = (robot) ->
           else
             robot.send "Error hubot-scripts update"
 
-      when /<@U0C8EL18D> wake up!/.test(req.body.text)
+      when /<@U0C8EL18D|hubot> wake up!/.test(req.body.text)
         robot.send { room: '#general' }, "I'm readly for @#{req.body.user_name}"
 
     res.end()
