@@ -17,6 +17,7 @@ child_process = require 'child_process'
 
 module.exports = (robot) ->
 
+  console.info(req.body)
   robot.router.post '/webhook', (req, res) ->
     switch true
       when /<@U0C8EL18D> update projects/.test(req.body.text)
