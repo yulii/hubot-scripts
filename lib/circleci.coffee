@@ -14,7 +14,7 @@ class CircleCI
     @destination = destination
     return @
 
-  execute: (robot, msg) ->
+  execute: (robot) ->
     params = JSON.stringify
                 build_parameters:
                   CIRCLE_JOB: @job
