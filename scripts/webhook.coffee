@@ -13,7 +13,7 @@
 # URLS:
 #   /webhook
 
-child_process = require 'child_process'
+CircleCI = require '../lib/circleci'
 
 module.exports = (robot) ->
 
