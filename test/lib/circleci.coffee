@@ -60,3 +60,15 @@ describe 'CircleCI', ->
             )
 
       expect(ci.endpoint()).to.equal('https://circleci.com/api/v1.1/project/github/yulii/mocha/tree/master')
+
+  describe '#notify', ->
+    it 'sets `destination` property', () ->
+      ci = new CircleCI(
+              owner: 'yulii'
+              job: 'test'
+              project: 'mocha'
+              token: 'circle-token'
+            ).notify('address')
+
+      expect(ci).to.be.an.instanceof(CircleCI)
+      expect(ci).to.have.property('destination', 'address')
