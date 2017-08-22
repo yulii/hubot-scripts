@@ -1,14 +1,27 @@
 class CircleCI
 
-  _apiUrl = 'https://circleci.com/api/v1.1'
-
   constructor: (args) ->
     @vcsType = args.vcsType ? 'github'
     @owner   = args.owner
     @project = args.project
     @branch  = args.branch ? 'master'
-    @token   = args.token
     @job     = args.job
+    @token   = args.token ? @tokenEnvValue()
+    _assert.call @
+
+  tokenEnvName: ->
+    return unless @project?
+    _tokenEnvName = "CIRCLE_TOKEN_#{@project.replace(/[-.]/gi, '_').toUpperCase()}" unless _tokenEnvName?
+    return _tokenEnvName
+
+  tokenEnvValue: ->
+    return unless @tokenEnvName?()
+    _tokenEnvValue = process.env[@tokenEnvName()] unless _tokenEnvValue?
+    return _tokenEnvValue
+
+  endpoint: ->
+    _endpoint = "https://circleci.com/api/v1.1/project/#{@vcsType}/#{@owner}/#{@project}/tree/#{@branch}" unless _endpoint?
+    return _endpoint
 
   notify: (destination) ->
     @destination = destination
@@ -20,7 +33,7 @@ class CircleCI
                   CIRCLE_JOB: @job
                   JOB_USER: robot.name
 
-    robot.http("#{_apiUrl}/project/#{@vcsType}/#{@owner}/#{@project}/tree/#{@branch}?circle-token=#{@token}")
+    robot.http("#{@endpoint()}?circle-token=#{@token}")
       .header('Content-Type', 'application/json')
       .header('Accept', 'application/json')
       .post(params) (error, response, body) ->
@@ -38,5 +51,11 @@ class CircleCI
           robot.send { room: @destination }, "Created a new build! #{result.build_url}"
         catch error
           console.error(error.message)
+
+  _assert = ->
+    throw new Error('`owner` is required argument')   unless @owner?
+    throw new Error('`project` is required argument') unless @project?
+    throw new Error('`job` is required argument')     unless @job?
+    throw new Error("Access token not found! `token` is not specified in arguments or environment variable `#{@tokenEnvName()}` is undefined.") unless @token?
 
 module.exports = CircleCI
