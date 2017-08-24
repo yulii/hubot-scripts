@@ -10,12 +10,10 @@ class CircleCI
     _assert.call @
 
   tokenEnvName: ->
-    return unless @project?
     _tokenEnvName = "CIRCLE_TOKEN_#{@project.replace(/[-.]/gi, '_').toUpperCase()}" unless _tokenEnvName?
     return _tokenEnvName
 
   tokenEnvValue: ->
-    return unless @tokenEnvName?()
     _tokenEnvValue = process.env[@tokenEnvName()] unless _tokenEnvValue?
     return _tokenEnvValue
 
@@ -46,11 +44,8 @@ class CircleCI
           robot.send { room: @destination }, "Request fail :( `#{response.statusCode}: #{response.statusMessage}`"
           return
 
-        try
-          result = JSON.parse(body)
-          robot.send { room: @destination }, "Created a new build! #{result.build_url}"
-        catch error
-          console.error(error.message)
+        result = JSON.parse(body)
+        robot.send { room: @destination }, "Created a new build! #{result.build_url}"
 
   _assert = ->
     throw new Error('`owner` is required argument')   unless @owner?
