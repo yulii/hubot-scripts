@@ -3,13 +3,6 @@ expect = require('chai').expect
 
 CircleCI = require(source)
 describe 'CircleCI', ->
-  _env = null
-
-  beforeEach ->
-    _env = JSON.parse(JSON.stringify(process.env))
-
-  afterEach ->
-    process.env = _env
 
   describe '#new', ->
     it 'return an instance with default values', () ->
@@ -22,6 +15,7 @@ describe 'CircleCI', ->
       expect(ci).to.have.property('branch',  'master')
       expect(ci).to.have.property('job',     'test')
       expect(ci).to.have.property('token',   'circle-token-mocha')
+      delete process.env.CIRCLE_TOKEN_MOCHA
 
     it 'return an instance', () ->
       ci = new CircleCI(vcsType: 'vcs', owner: 'yulii', project: 'mocha', branch: 'test/lib', job: 'test', token: 'circle')
@@ -40,15 +34,36 @@ describe 'CircleCI', ->
       expect(-> new CircleCI(owner: 'yulii', project: 'mocha', job: 'test'                 )).to.throw(Error, /Access token not found!/)
 
   describe '#tokenEnvName', ->
+    beforeEach ->
+      process.env.CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME = 'circle-project-token'
+
+    afterEach ->
+      delete process.env.CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME
+
     it 'return environment variable name', () ->
       ci = new CircleCI(
               owner: 'yulii'
               job: 'test'
               project: 'project.repository-name'
-              token: 'circle-token'
             )
 
       expect(ci.tokenEnvName()).to.equal('CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME')
+
+  describe '#tokenEnvValue', ->
+    beforeEach ->
+      process.env.CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME = 'circle-project-token'
+
+    afterEach ->
+      delete process.env.CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME
+
+    it 'return environment variable', () ->
+      ci = new CircleCI(
+              owner: 'yulii'
+              job: 'test'
+              project: 'project.repository-name'
+            )
+
+      expect(ci.tokenEnvValue()).to.equal('circle-project-token')
 
   describe '#endpoint', ->
     it 'return endpoint url in CircleCI API', () ->
