@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:9.2
     steps:
       - checkout
 
@@ -29,7 +29,7 @@ jobs:
 
   update:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:9.2
         environment:
           FORK_USERNAME: yulii-bot
           UPDATE_LOCK_FILE: yarn.lock
