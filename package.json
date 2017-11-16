@@ -36,8 +36,8 @@
     "mocha": "^2.3.3"
   },
   "engines": {
-    "node": ">= 0.8.x",
-    "npm": ">= 1.1.x"
+    "node": ">= 0.9.2",
+    "npm": ">= 5.5.1"
   },
   "scripts": {
     "test": "mocha --require coffee-coverage/register-istanbul",
