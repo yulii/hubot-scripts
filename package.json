@@ -33,11 +33,11 @@
     "david": "^7.0.0",
     "hubot-mock-adapter": "^1.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "^2.3.3"
+    "mocha": ">= 3.5.3 < 4.0.0"
   },
   "engines": {
-    "node": ">= 0.9.2",
-    "npm": ">= 5.5.1"
+    "node": "8.9.1",
+    "npm": "5.5.1"
   },
   "scripts": {
     "test": "mocha --require coffee-coverage/register-istanbul",
