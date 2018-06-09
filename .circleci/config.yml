@@ -37,8 +37,8 @@ jobs:
       - run:
           name: Checkout code
           command: |
-            git clone -b master --depth 1 https://${FORK_REPO_TOKEN}@github.com/${FORK_REPO}.git .
-            git remote add upstream https://github.com/${ORIGINAL_REPO}.git
+            git clone -b master --depth 1 https://${FORK_REPO_TOKEN}@github.com/yulii-bot/hubot-scripts.git .
+            git remote add upstream https://github.com/yulii/hubot-scripts.git
             git fetch upstream
             git checkout master
             git merge upstream/master
@@ -67,7 +67,7 @@ jobs:
             curl -H "Authorization: token ${FORK_REPO_TOKEN}" \
                  -X POST -H "Content-Type: application/json" \
                  -d "{ \"title\": \"Yarn upgrade\", \"body\": \"Auto update pull request!\", \"head\": \"yulii-bot:${BRANCH}\", \"base\": \"master\" }" \
-                 "https://api.github.com/repos/${ORIGINAL_REPO}/pulls" \
+                 "https://api.github.com/repos/yulii/hubot-scripts/pulls" \
                  | tee /tmp/create-pull-request.log.json
             test -n "$(cat /tmp/create-pull-request.log.json | jq -r 'select(.errors == null)')"
 workflows:
