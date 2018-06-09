@@ -11,7 +11,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: yarn install
+          command: yarn install --ignore-engines
 
       - save_cache:
           key: hubot-script-dependencies-{{ checksum "yarn.lock" }}
@@ -44,7 +44,7 @@ jobs:
             git merge upstream/master
       - run:
           name: Update dependencies
-          command: yarn upgrade
+          command: yarn upgrade --ignore-engines
       - run:
           name: Commit auto update file
           command: |
