@@ -1,12 +1,10 @@
 {
   "name": "hosted-hubot",
-  "version": "2.7.1",
+  "version": "3.3.2",
   "private": true,
-  "author": "GitHub Inc.",
+  "author": "Ryo Yoneyama (yulii)",
   "keywords": [
-    "github",
     "hubot",
-    "campfire",
     "bot"
   ],
   "description": "A simple helpful robot for your Company",
@@ -30,7 +28,6 @@
     "coffee-coverage": "latest",
     "coffeescript": "latest",
     "coveralls": "latest",
-    "david": "latest",
     "hubot-mock-adapter": "latest",
     "istanbul": "latest",
     "mocha": "latest"
