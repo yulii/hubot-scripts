@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.9
+      - image: circleci/node:12.12
     steps:
       - checkout
 
@@ -11,7 +11,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: yarn install --ignore-engines
+          command: yarn install
 
       - save_cache:
           key: hubot-script-dependencies-{{ checksum "yarn.lock" }}
@@ -44,7 +44,7 @@ jobs:
             git merge upstream/master
       - run:
           name: Update dependencies
-          command: yarn upgrade --ignore-engines
+          command: yarn upgrade
       - run:
           name: Commit auto update file
           command: |
