@@ -1,2 +1,2 @@
---compilers coffee:coffee-script/register
---recursive
+--require coffeescript/register
+--require coffee-coverage/register-istanbul
