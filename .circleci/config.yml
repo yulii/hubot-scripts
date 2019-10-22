@@ -29,7 +29,7 @@ jobs:
 
   update:
     docker:
-      - image: circleci/node:8.9
+      - image: circleci/node:12.12
         environment:
           FORK_USERNAME: yulii-bot
           UPDATE_LOCK_FILE: yarn.lock
