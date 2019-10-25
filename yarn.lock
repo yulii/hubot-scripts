@@ -824,9 +824,9 @@ http-signature@~1.2.0:
     sshpk "^1.7.0"
 
 https-proxy-agent@^2.2.0:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-2.2.3.tgz#fb6cd98ed5b9c35056b5a73cd01a8a721d7193d1"
-  integrity sha512-Ytgnz23gm2DVftnzqRRz2dOXZbGd2uiajSw/95bPp6v53zPRspQjLm/AfBgqbJ2qfeRXWIOMVLpp86+/5yX39Q==
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-2.2.4.tgz#4ee7a737abd92678a293d9b34a1af4d0d08c787b"
+  integrity sha512-OmvfoQ53WLjtA9HeYP9RNrWMJzzAz1JGaSFr1nijg0PVR1JaD/xbJq1mdEIIlxGpXp9eSe/O2LgU9DJmTPd0Eg==
   dependencies:
     agent-base "^4.3.0"
     debug "^3.1.0"
@@ -1671,9 +1671,9 @@ type-is@~1.6.16, type-is@~1.6.17, type-is@~1.6.18:
     mime-types "~2.1.24"
 
 uglify-js@^3.1.4:
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.6.3.tgz#1351533bbe22cc698f012589ed6bd4cbd971bff8"
-  integrity sha512-KfQUgOqTkLp2aZxrMbCuKCDGW9slFYu2A23A36Gs7sGzTLcRBDORdOi5E21KWHFIfkY8kzgi/Pr1cXCh0yIp5g==
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.6.4.tgz#88cc880c6ed5cf9868fdfa0760654e7bed463f1d"
+  integrity sha512-9Yc2i881pF4BPGhjteCXQNaXx1DCwm3dtOyBaG2hitHjLWOczw/ki8vD1bqyT3u6K0Ms/FpCShkmfg+FtlOfYA==
   dependencies:
     commander "~2.20.3"
     source-map "~0.6.1"
