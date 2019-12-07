@@ -35,11 +35,9 @@ class AlphaVantageTimeSeriesDaily
     return _timezone
 
   beginDate: ->
-    _beginDate = Math.min(..._ts_keys) unless _beginDate?
     return _beginDate
 
   endDate: ->
-    _endDate = Math.max(..._ts_keys) unless _endDate?
     return _endDate
 
   closingPrice: (timestamp) ->
@@ -52,8 +50,10 @@ class AlphaVantageTimeSeriesDaily
     return _round(100 * (@closingPrice(end) - @closingPrice(begin)) / @closingPrice(begin), 2)
 
   _initialize = ->
-    _timezone = _meta['5. Time Zone']
-    _ts_keys  = Object.keys(_data).map((x) -> moment.tz(x, _timezone).valueOf()).sort((a, b) -> return (a < b ? 1 : -1))
+    _timezone  = _meta['5. Time Zone']
+    _ts_keys   = Object.keys(_data).map((x) -> moment.tz(x, _timezone).valueOf()).sort((a, b) -> return (a < b ? 1 : -1))
+    _beginDate = Math.min(..._ts_keys)
+    _endDate   = Math.max(..._ts_keys)
 
   _key = (timestamp) ->
     return moment(timestamp).tz(_timezone).format('YYYY-MM-DD')
