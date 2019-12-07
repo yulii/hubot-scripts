@@ -30,7 +30,7 @@
     "coffeelint": "latest",
     "coveralls": "latest",
     "hubot-mock-adapter": "latest",
-    "istanbul": "latest",
+    "nyc": "latest",
     "mocha": "latest"
   },
   "engines": {
@@ -38,8 +38,8 @@
     "npm": ">= 6.0.0"
   },
   "scripts": {
-    "test": "mocha \"test/**/*.{js,coffee}\"",
+    "test": "mocha \"test/**/*.coffee\"",
     "lint": "coffeelint lib/ scripts/ test/",
-    "coverage": "istanbul report text-summary lcov"
+    "coverage": "nyc mocha \"test/**/*.coffee\""
   }
 }

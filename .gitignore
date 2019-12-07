@@ -2,5 +2,6 @@ coverage
 node_modules
 .DS_Store*
 .hubot_history
+.nyc_output
 npm-debug.log
 package-lock.json
