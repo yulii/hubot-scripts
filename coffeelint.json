@@ -3,8 +3,8 @@
     "level": "ignore"
   },
   "braces_spacing": {
-    "level": "error",
-    "spaces": 1,
+    "level": "ignore",
+    "spaces": 0,
     "empty_object_spaces": 0
   },
   "camel_case_classes": {
