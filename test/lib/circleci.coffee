@@ -1,11 +1,12 @@
 source = '../../lib/circleci'
+helper = require('../test_helper')
 expect = require('chai').expect
 
 CircleCI = require(source)
 describe 'CircleCI', ->
 
   describe '#new', ->
-    it 'return an instance with default values', () ->
+    it 'returns an instance with default values', () ->
       process.env.CIRCLE_TOKEN_MOCHA = 'circle-token-mocha'
       ci = new CircleCI(owner: 'yulii', project: 'mocha', job: 'test')
       expect(ci).to.be.an.instanceof(CircleCI)
@@ -17,7 +18,7 @@ describe 'CircleCI', ->
       expect(ci).to.have.property('token',   'circle-token-mocha')
       delete process.env.CIRCLE_TOKEN_MOCHA
 
-    it 'return an instance', () ->
+    it 'returns an instance', () ->
       ci = new CircleCI(vcsType: 'vcs', owner: 'yulii', project: 'mocha', branch: 'test/lib', job: 'test', token: 'circle')
       expect(ci).to.be.an.instanceof(CircleCI)
       expect(ci).to.have.property('vcsType', 'vcs')
@@ -40,7 +41,7 @@ describe 'CircleCI', ->
     afterEach ->
       delete process.env.CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME
 
-    it 'return environment variable name', () ->
+    it 'returns environment variable name', () ->
       ci = new CircleCI(
               owner: 'yulii'
               job: 'test'
@@ -56,7 +57,7 @@ describe 'CircleCI', ->
     afterEach ->
       delete process.env.CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME
 
-    it 'return environment variable', () ->
+    it 'returns environment variable', () ->
       ci = new CircleCI(
               owner: 'yulii'
               job: 'test'
@@ -66,7 +67,7 @@ describe 'CircleCI', ->
       expect(ci.tokenEnvValue()).to.equal('circle-project-token')
 
   describe '#endpoint', ->
-    it 'return endpoint url in CircleCI API', () ->
+    it 'returns endpoint url in CircleCI API', () ->
       ci = new CircleCI(
               owner: 'yulii'
               job: 'test'
