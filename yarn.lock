@@ -291,7 +291,7 @@ coffeescript@1.6.3:
   resolved "https://registry.yarnpkg.com/coffeescript/-/coffeescript-1.6.3.tgz#41749750c621a6553c7c03818a5384bb24c30541"
   integrity sha1-QXSXUMYhplU8fAOBilOEuyTDBUE=
 
-coffeescript@^2.0.2, coffeescript@^2.1.0, coffeescript@latest:
+coffeescript@^2.0.2, coffeescript@^2.1.0, coffeescript@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/coffeescript/-/coffeescript-2.4.1.tgz#815fd337df0a34d49e74a98a6ebea9c3e7930f70"
   integrity sha512-34GV1aHrsMpTaO3KfMJL40ZNuvKDR/g98THHnE9bQj8HjMaZvSrLik99WWqyMhRtbe8V5hpx5iLgdcSvM/S2wg==
@@ -861,13 +861,6 @@ hubot-mock-adapter@latest:
   dependencies:
     hubot ">=2.5.4"
 
-hubot-scripts@^2.17.2:
-  version "2.17.2"
-  resolved "https://registry.yarnpkg.com/hubot-scripts/-/hubot-scripts-2.17.2.tgz#9b08e907d5cfaba72d783204067a78ce9df3ae24"
-  integrity sha1-mwjpB9XPq6cteDIEBnp4zp3zriQ=
-  dependencies:
-    redis "0.8.4"
-
 hubot-slack@^4.7.1:
   version "4.7.1"
   resolved "https://registry.yarnpkg.com/hubot-slack/-/hubot-slack-4.7.1.tgz#76cb6bec0d48d3b6718b8be1735edebc8c420a3b"
@@ -1422,11 +1415,6 @@ raw-body@2.4.0:
     http-errors "1.7.2"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
-
-redis@0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/redis/-/redis-0.8.4.tgz#14609f26414e211c31e3cd07dc79b04bf9ff1980"
-  integrity sha1-FGCfJkFOIRwx480H3HmwS/n/GYA=
 
 request@^2.85.0, request@^2.88.0:
   version "2.88.0"
