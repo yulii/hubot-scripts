@@ -1,12 +1,11 @@
 moment = require('moment-timezone')
 
 class AlphaVantageTimeSeriesDaily
-  _meta       = undefined
-  _data       = undefined
-  _timezone   = undefined
-  _ts_keys    = undefined
-  _begin_date = undefined
-  _end_date   = undefined
+  _meta        = undefined
+  _data        = undefined
+  _timezone    = undefined
+  _ts_keys     = undefined
+  _latest_date = undefined
 
   constructor: (object) ->
     _meta  = object['Meta Data']
@@ -22,23 +21,20 @@ class AlphaVantageTimeSeriesDaily
     for t in keys
       compare.push(
         timestamp: t,
-        diff: @diffClosingPrice(t, @endDate()),
-        ratio: @ratioClosingPrice(t, @endDate())
+        diff: @diffClosingPrice(t, _latest_date),
+        ratio: @ratioClosingPrice(t, _latest_date)
       )
 
     return
-      timestamp: @endDate()
-      price: @closingPrice(@endDate())
+      timestamp: _latest_date
+      price: @closingPrice(_latest_date)
       compare: compare
 
   timezone: ->
     return _timezone
 
-  beginDate: ->
-    return _begin_date
-
-  endDate: ->
-    return _end_date
+  latestDate: ->
+    return _latest_date
 
   closingPrice: (timestamp) ->
     return parseFloat(_data[_key(timestamp)]['4. close'])
@@ -50,10 +46,9 @@ class AlphaVantageTimeSeriesDaily
     return _round(100 * (@closingPrice(end) - @closingPrice(begin)) / @closingPrice(begin), 2)
 
   _initialize = ->
-    _timezone   = _meta['5. Time Zone']
-    _ts_keys    = Object.keys(_data).map((x) -> moment.tz(x, _timezone).valueOf()).sort((a, b) -> return (a < b ? 1 : -1))
-    _begin_date = Math.min(..._ts_keys)
-    _end_date   = Math.max(..._ts_keys)
+    _timezone    = _meta['5. Time Zone']
+    _ts_keys     = Object.keys(_data).map((x) -> moment.tz(x, _timezone).valueOf()).sort((a, b) -> return (a < b ? 1 : -1))
+    _latest_date = Math.max(..._ts_keys)
 
   _key = (timestamp) ->
     return moment(timestamp).tz(_timezone).format('YYYY-MM-DD')

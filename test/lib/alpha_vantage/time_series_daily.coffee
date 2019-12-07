@@ -23,13 +23,9 @@ describe 'AlphaVantageTimeSeriesDaily', ->
     it 'returns Time Zone', () ->
       expect(subject.timezone()).to.equal('US/Eastern')
 
-  describe '#beginDate', ->
+  describe '#latestDate', ->
     it 'returns a timestamp', () ->
-      expect(subject.beginDate()).to.equal(1563249600000)
-
-  describe '#endDate', ->
-    it 'returns a timestamp', () ->
-      expect(subject.endDate()).to.equal(1575435600000)
+      expect(subject.latestDate()).to.equal(1575435600000)
 
   describe '#closingPrice', ->
     it 'return a floating point number', () ->
