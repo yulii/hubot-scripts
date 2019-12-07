@@ -19,7 +19,7 @@
     "url": "https://github.com/github/hubot.git"
   },
   "dependencies": {
-    "coffeescript": "^2.4.1",
+    "coffeescript": "^1.12.7",
     "moment-timezone": "^0.5.27",
     "hubot": "^3.3.2",
     "hubot-slack": "^4.7.1"
