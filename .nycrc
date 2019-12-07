@@ -1,0 +1,12 @@
+{
+    "reporter" : ["text-summary", "lcov"],
+    "extension": [".coffee"],
+    "include": [
+      "lib/**/*",
+      "scripts/**/*"
+    ],
+    "exclude": [
+      "node_modules/**",
+      "test/**"
+    ]
+}
