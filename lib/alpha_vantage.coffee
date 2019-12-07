@@ -13,10 +13,7 @@ class AlphaVantage
     return _endpoint
 
   execute: (robot, callback) ->
-    queryString = QueryString.build
-                    apiKey: @token
-                    function: @function
-                    symbol: @symbol
+    queryString = QueryString.build(apiKey: @token, function: @function, symbol: @symbol)
 
     robot.http("#{@endpoint()}?#{queryString}")
       .header('Content-Type', 'application/json')

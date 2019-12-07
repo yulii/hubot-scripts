@@ -42,12 +42,7 @@ describe 'CircleCI', ->
       delete process.env.CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME
 
     it 'returns environment variable name', () ->
-      ci = new CircleCI(
-              owner: 'yulii'
-              job: 'test'
-              project: 'project.repository-name'
-            )
-
+      ci = new CircleCI(owner: 'yulii', job: 'test', project: 'project.repository-name')
       expect(ci.tokenEnvName()).to.equal('CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME')
 
   describe '#tokenEnvValue', ->
@@ -58,33 +53,16 @@ describe 'CircleCI', ->
       delete process.env.CIRCLE_TOKEN_PROJECT_REPOSITORY_NAME
 
     it 'returns environment variable', () ->
-      ci = new CircleCI(
-              owner: 'yulii'
-              job: 'test'
-              project: 'project.repository-name'
-            )
-
+      ci = new CircleCI(owner: 'yulii', job: 'test', project: 'project.repository-name')
       expect(ci.tokenEnvValue()).to.equal('circle-project-token')
 
   describe '#endpoint', ->
     it 'returns endpoint url in CircleCI API', () ->
-      ci = new CircleCI(
-              owner: 'yulii'
-              job: 'test'
-              project: 'mocha'
-              token: 'circle-token'
-            )
-
+      ci = new CircleCI(owner: 'yulii', job: 'test', project: 'mocha', token: 'circle-token')
       expect(ci.endpoint()).to.equal('https://circleci.com/api/v1.1/project/github/yulii/mocha/tree/master')
 
   describe '#notify', ->
     it 'sets `destination` property', () ->
-      ci = new CircleCI(
-              owner: 'yulii'
-              job: 'test'
-              project: 'mocha'
-              token: 'circle-token'
-            ).notify('address')
-
+      ci = new CircleCI(owner: 'yulii', job: 'test', project: 'mocha', token: 'circle-token').notify('address')
       expect(ci).to.be.an.instanceof(CircleCI)
       expect(ci).to.have.property('destination', 'address')
