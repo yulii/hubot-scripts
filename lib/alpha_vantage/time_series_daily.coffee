@@ -8,8 +8,7 @@ class AlphaVantageTimeSeriesDaily
   _beginDate = undefined
   _endDate   = undefined
 
-  constructor: (json) ->
-    object = JSON.parse(json)
+  constructor: (object) ->
     _meta  = object['Meta Data']
     _data  = object['Time Series (Daily)']
 

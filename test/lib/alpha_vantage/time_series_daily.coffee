@@ -7,7 +7,8 @@ describe 'AlphaVantageTimeSeriesDaily', ->
   subject = undefined
 
   beforeEach ->
-    subject = new AlphaVantageTimeSeriesDaily(helper.fixture.time_series_daily)
+    object  = JSON.parse(helper.fixture.time_series_daily)
+    subject = new AlphaVantageTimeSeriesDaily(object)
 
   describe '#outline', ->
     it 'returns an object', () ->
