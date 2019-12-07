@@ -26,10 +26,7 @@ class CircleCI
     return @
 
   execute: (robot) ->
-    params = JSON.stringify
-                build_parameters:
-                  CIRCLE_JOB: @job
-                  JOB_USER: robot.name
+    params = JSON.stringify(build_parameters: { CIRCLE_JOB: @job, JOB_USER: robot.name })
 
     robot.http("#{@endpoint()}?circle-token=#{@token}")
       .header('Content-Type', 'application/json')

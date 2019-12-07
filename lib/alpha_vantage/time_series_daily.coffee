@@ -53,7 +53,7 @@ class AlphaVantageTimeSeriesDaily
 
   _initialize = ->
     _timezone = _meta['5. Time Zone']
-    _ts_keys  = Object.keys(_data).map((x) => moment.tz(x, _timezone).valueOf()).sort((a, b) => return (a < b ? 1 : -1))
+    _ts_keys  = Object.keys(_data).map((x) -> moment.tz(x, _timezone).valueOf()).sort((a, b) -> return (a < b ? 1 : -1))
 
   _key = (timestamp) ->
     return moment(timestamp).tz(_timezone).format('YYYY-MM-DD')
