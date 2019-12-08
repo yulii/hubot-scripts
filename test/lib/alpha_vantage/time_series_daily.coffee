@@ -12,12 +12,16 @@ describe 'AlphaVantageTimeSeriesDaily', ->
 
   describe '#outline', ->
     it 'returns an object', () ->
-      expect(subject.outline()).to.include(timestamp: 1575435600000, price: 149.85)
+      expect(subject.outline()).to.include(timestamp: 1575435600000, symbol: 'MSFT', price: 149.85)
       expect(subject.outline().compare).to.have.ordered.deep.members([
         { timestamp: 1575349200000, diff: 0.54,  ratio: 0.36 }
         { timestamp: 1572930000000, diff: 5.39,  ratio: 3.73 }
         { timestamp: 1568088000000, diff: 13.77, ratio: 10.12 }
       ])
+
+  describe '#symbol', ->
+    it 'returns Symbol', () ->
+      expect(subject.symbol()).to.equal('MSFT')
 
   describe '#timezone', ->
     it 'returns Time Zone', () ->

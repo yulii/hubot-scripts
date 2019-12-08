@@ -3,6 +3,7 @@ moment = require('moment-timezone')
 class AlphaVantageTimeSeriesDaily
   _meta        = undefined
   _data        = undefined
+  _symbol      = undefined
   _timezone    = undefined
   _ts_keys     = undefined
 
@@ -26,8 +27,12 @@ class AlphaVantageTimeSeriesDaily
 
     return
       timestamp: @latestDate()
+      symbol: @symbol()
       price: @closingPrice(@latestDate())
       compare: compare
+
+  symbol: ->
+    return _symbol
 
   timezone: ->
     return _timezone
@@ -45,8 +50,9 @@ class AlphaVantageTimeSeriesDaily
     return _round(100 * (@closingPrice(end) - @closingPrice(begin)) / @closingPrice(begin), 2)
 
   _initialize = ->
-    _timezone    = _meta['5. Time Zone']
-    _ts_keys     = Object.keys(_data).map((x) -> moment.tz(x, _timezone).valueOf()).sort((a, b) -> return (a < b ? 1 : -1))
+    _symbol   = _meta['2. Symbol']
+    _timezone = _meta['5. Time Zone']
+    _ts_keys  = Object.keys(_data).map((x) -> moment.tz(x, _timezone).valueOf()).sort((a, b) -> return (a < b ? 1 : -1))
 
   _key = (timestamp) ->
     return moment(timestamp).tz(_timezone).format('YYYY-MM-DD')

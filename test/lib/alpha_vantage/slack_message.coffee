@@ -9,6 +9,7 @@ describe 'AlphaVantageSlackMessage', ->
   beforeEach ->
     object  = {
       timestamp: 1575435600000,
+      symbol: 'MSFT',
       price: 149.85,
       compare: [
         { timestamp: 1575349200000, diff: 0.54,  ratio: 0.36  }
@@ -20,7 +21,7 @@ describe 'AlphaVantageSlackMessage', ->
 
   describe '#format', ->
     it 'returns a string', () ->
-      expect(subject.format()).to.include(text: '*149.85* December 4, 2019', mrkdwn: true)
+      expect(subject.format()).to.include(text: 'MSFT *149.85* at December 4, 2019', mrkdwn: true)
       expect(subject.format().attachments).to.have.ordered.deep.members([
         { color: '#155724', text: '+0.54 (+0.36%) at December 3, 2019' }
         { color: '#721c24', text: '-5.39 (-3.73%) at November 5, 2019' }
@@ -46,3 +47,9 @@ describe 'AlphaVantageSlackMessage', ->
   describe '.date', ->
     it 'returns a date', () ->
       expect(AlphaVantageSlackMessage.date(1575435600000)).to.equal('December 4, 2019')
+
+  describe '.name', ->
+    it 'returns a string', () ->
+      expect(AlphaVantageSlackMessage.name('^GSPC')).to.equal('S&P 500 (^GSPC)')
+    it 'returns an argument with undefined symbol', () ->
+      expect(AlphaVantageSlackMessage.name('SYMBOL')).to.equal('SYMBOL')

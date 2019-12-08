@@ -17,7 +17,7 @@ class AlphaVantageSlackMessage
       )
 
     return {
-      text: "*#{_outline.price}* #{self.date(_outline.timestamp)}",
+      text: "#{self.name(_outline.symbol)} *#{_outline.price}* at #{self.date(_outline.timestamp)}",
       attachments: attachments,
       mrkdwn: true
     }
@@ -33,6 +33,10 @@ class AlphaVantageSlackMessage
 
   @date: (timestamp) ->
     return moment(timestamp).tz('Asia/Tokyo').format('LL')
+
+  @name: (symbol) ->
+    return 'S&P 500 (^GSPC)' if symbol == '^GSPC'
+    return symbol
 
   toString: ->
     return JSON.stringify(@format())
