@@ -48,8 +48,8 @@ describe 'AlphaVantageSlackMessage', ->
     it 'returns a date', () ->
       expect(AlphaVantageSlackMessage.date(1575435600000)).to.equal('December 4, 2019')
 
-  describe '.name', ->
+  describe '.index', ->
     it 'returns a string', () ->
-      expect(AlphaVantageSlackMessage.name('^GSPC')).to.equal('S&P 500 (^GSPC)')
+      expect(AlphaVantageSlackMessage.index('^GSPC')).to.equal('S&P 500 (^GSPC)')
     it 'returns an argument with undefined symbol', () ->
-      expect(AlphaVantageSlackMessage.name('SYMBOL')).to.equal('SYMBOL')
+      expect(AlphaVantageSlackMessage.index('SYMBOL')).to.equal('SYMBOL')
