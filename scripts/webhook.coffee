@@ -31,6 +31,17 @@ module.exports = (robot) ->
             catch error
               robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
 
+        when /show market indexes!/i.test(req.body.text)
+          ['^GSPC'].forEach (name) ->
+            try
+              new AlphaVantage(
+                function: 'TIME_SERIES_DAILY', symbol: name
+              ).execute(robot, (message) ->
+                robot.send { room: '#ramdom' }, message.format()
+              )
+            catch error
+              robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
+
         when /wake up!/i.test(req.body.text)
           robot.send { room: '#general' }, "I'm readly for @#{req.body.user_name}"
 
