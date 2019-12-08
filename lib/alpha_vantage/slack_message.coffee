@@ -23,9 +23,9 @@ class AlphaVantageSlackMessage
     }
 
   @color: (number) ->
-    return '#155724' if number > 0
-    return '#721c24' if number < 0
-    return '#383d41'
+    return '#35A64F' if number > 0
+    return '#D1091F' if number < 0
+    return '#DCDCDC'
 
   @compare: (number) ->
     return "+#{number}" if number > 0
