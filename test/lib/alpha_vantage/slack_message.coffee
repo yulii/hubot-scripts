@@ -23,18 +23,18 @@ describe 'AlphaVantageSlackMessage', ->
     it 'returns a string', () ->
       expect(subject.format()).to.include(text: 'MSFT *149.85* at December 4, 2019', mrkdwn: true)
       expect(subject.format().attachments).to.have.ordered.deep.members([
-        { color: '#155724', text: '+0.54 (+0.36%) at December 3, 2019' }
-        { color: '#721c24', text: '-5.39 (-3.73%) at November 5, 2019' }
-        { color: '#383d41', text: '0 (0%) at September 10, 2019' }
+        { color: '#35A64F', text: '+0.54 (+0.36%) at December 3, 2019' }
+        { color: '#D1091F', text: '-5.39 (-3.73%) at November 5, 2019' }
+        { color: '#DCDCDC', text: '0 (0%) at September 10, 2019' }
       ])
 
   describe '.color', ->
     it 'returns a color code with a positive number', () ->
-      expect(AlphaVantageSlackMessage.color(0.1)).to.equal('#155724')
+      expect(AlphaVantageSlackMessage.color(0.1)).to.equal('#35A64F')
     it 'returns a color code with zero', () ->
-      expect(AlphaVantageSlackMessage.color(0)).to.equal('#383d41')
+      expect(AlphaVantageSlackMessage.color(0)).to.equal('#DCDCDC')
     it 'returns a color code with a negative number', () ->
-      expect(AlphaVantageSlackMessage.color(-0.1)).to.equal('#721c24')
+      expect(AlphaVantageSlackMessage.color(-0.1)).to.equal('#D1091F')
 
   describe '.compare', ->
     it 'returns a number string with a positive number', () ->
