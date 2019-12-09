@@ -31,7 +31,8 @@
     "coveralls": "latest",
     "hubot-mock-adapter": "latest",
     "nyc": "latest",
-    "mocha": "latest"
+    "mocha": "latest",
+    "sinon": "latest"
   },
   "engines": {
     "node": ">= 12.0.0",
