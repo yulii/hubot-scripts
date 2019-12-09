@@ -24,11 +24,11 @@ describe 'AlphaVantage', ->
 
   describe '#execute', ->
     robot = undefined
-    stub  = undefined
+    http_stub = undefined
 
     beforeEach ->
       robot = new Robot(null, 'mock-adapter', false, 'hubot')
-      stub  = (callback) ->
+      http_stub = (callback) ->
         sinon.stub(robot, 'http').returns(
           header: sinon.stub().returnsThis()
           get: sinon.stub().callsFake(() -> return callback)
@@ -38,7 +38,7 @@ describe 'AlphaVantage', ->
       robot.http.restore()
 
     it 'returns an instance with default values', () ->
-      stub((f) -> f('error', 'response', helper.fixture.time_series_daily))
+      http_stub((f) -> f('error', 'response', helper.fixture.time_series_daily))
 
       av = new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL').execute(robot, (message) ->
         expect(message).to.be.an.instanceof(AlphaVantageSlackMessage)
