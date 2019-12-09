@@ -13,7 +13,8 @@
 # URLS:
 #   /webhook
 
-CircleCI = require '../lib/circleci'
+AlphaVantage = require '../lib/alpha_vantage'
+CircleCI     = require '../lib/circleci'
 
 module.exports = (robot) ->
 
