@@ -1,8 +1,7 @@
-source = '../../../lib/alpha_vantage/slack_message'
 helper = require('../../test_helper')
 expect = require('chai').expect
 
-AlphaVantageSlackMessage = require(source)
+AlphaVantageSlackMessage = helper.require('alpha_vantage/slack_message')
 describe 'AlphaVantageSlackMessage', ->
   subject = undefined
 

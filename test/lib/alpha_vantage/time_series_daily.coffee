@@ -1,8 +1,7 @@
-source = '../../../lib/alpha_vantage/time_series_daily'
 helper = require('../../test_helper')
 expect = require('chai').expect
 
-AlphaVantageTimeSeriesDaily = require(source)
+AlphaVantageTimeSeriesDaily = helper.require('alpha_vantage/time_series_daily')
 describe 'AlphaVantageTimeSeriesDaily', ->
   subject = undefined
 
