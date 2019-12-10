@@ -1,8 +1,7 @@
-source = '../../lib/circleci'
 helper = require('../test_helper')
 expect = require('chai').expect
 
-CircleCI = require(source)
+CircleCI = helper.require('circleci')
 describe 'CircleCI', ->
 
   describe '#new', ->

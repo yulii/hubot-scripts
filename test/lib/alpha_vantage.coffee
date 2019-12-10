@@ -1,12 +1,11 @@
-source = '../../lib/alpha_vantage'
 helper = require('../test_helper')
 expect = require('chai').expect
 sinon  = require('sinon')
 
 Robot = require('hubot/src/robot')
-AlphaVantageSlackMessage = require '../../lib/alpha_vantage/slack_message'
-AlphaVantageErrorMessage = require '../../lib/alpha_vantage/error_message'
-AlphaVantage = require(source)
+AlphaVantageSlackMessage = helper.require('alpha_vantage/slack_message')
+AlphaVantageErrorMessage = helper.require('alpha_vantage/error_message')
+AlphaVantage = helper.require('alpha_vantage')
 describe 'AlphaVantage', ->
 
   beforeEach ->

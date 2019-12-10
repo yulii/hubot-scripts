@@ -1,8 +1,7 @@
-source = '../../../lib/alpha_vantage/error_message'
 helper = require('../../test_helper')
 expect = require('chai').expect
 
-AlphaVantageErrorMessage = require(source)
+AlphaVantageErrorMessage = helper.require('alpha_vantage/error_message')
 describe 'AlphaVantageErrorMessage', ->
   subject = undefined
 

@@ -1,4 +1,4 @@
-QueryString = require './query_string'
+HttpQueryString = require './http/query_string'
 AlphaVantageTimeSeriesDaily = require './alpha_vantage/time_series_daily'
 AlphaVantageErrorMessage    = require './alpha_vantage/error_message'
 AlphaVantageSlackMessage    = require './alpha_vantage/slack_message'
@@ -15,7 +15,7 @@ class AlphaVantage
     return _endpoint
 
   execute: (robot, callback) ->
-    queryString = QueryString.build(apikey: @token, function: @function, symbol: @symbol)
+    queryString = HttpQueryString.build(apikey: @token, function: @function, symbol: @symbol)
 
     robot.http("#{@endpoint()}?#{queryString}")
       .header('Content-Type', 'application/json')
