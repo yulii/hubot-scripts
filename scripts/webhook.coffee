@@ -38,7 +38,7 @@ module.exports = (robot) ->
               new AlphaVantage(
                 function: 'TIME_SERIES_DAILY', symbol: name
               ).execute(robot, (message) ->
-                robot.send { room: '#ramdom' }, message.format()
+                robot.send { room: '#random' }, message.format()
               )
             catch error
               robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
