@@ -36,6 +36,8 @@ class AlphaVantageSlackMessage
 
   @index: (symbol) ->
     return 'S&P 500 (^GSPC)' if symbol == '^GSPC'
+    return 'ダウ平均 (^DJI)'  if symbol == '^DJI'
+    return '日経平均 (^N225)' if symbol == '^N225'
     return symbol
 
   toString: ->

@@ -50,5 +50,7 @@ describe 'AlphaVantageSlackMessage', ->
   describe '.index', ->
     it 'returns a string', () ->
       expect(AlphaVantageSlackMessage.index('^GSPC')).to.equal('S&P 500 (^GSPC)')
+      expect(AlphaVantageSlackMessage.index('^DJI')).to.equal('ダウ平均 (^DJI)')
+      expect(AlphaVantageSlackMessage.index('^N225')).to.equal('日経平均 (^N225)')
     it 'returns an argument with undefined symbol', () ->
       expect(AlphaVantageSlackMessage.index('SYMBOL')).to.equal('SYMBOL')

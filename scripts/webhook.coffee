@@ -33,7 +33,7 @@ module.exports = (robot) ->
               robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
 
         when /show market indexes!/i.test(req.body.text)
-          ['^GSPC'].forEach (name) ->
+          ['^GSPC', '^DJI', '^N225'].forEach (name) ->
             try
               new AlphaVantage(
                 function: 'TIME_SERIES_DAILY', symbol: name
