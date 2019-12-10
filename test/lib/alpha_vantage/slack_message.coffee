@@ -20,7 +20,7 @@ describe 'AlphaVantageSlackMessage', ->
     subject = new AlphaVantageSlackMessage(object)
 
   describe '#format', ->
-    it 'returns a string', () ->
+    it 'returns a object for slack message', () ->
       expect(subject.format()).to.include(text: 'MSFT *149.85* at December 4, 2019', mrkdwn: true)
       expect(subject.format().attachments).to.have.ordered.deep.members([
         { color: '#35A64F', text: '+0.54 (+0.36%) at December 3, 2019' }
