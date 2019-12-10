@@ -1,5 +1,6 @@
 QueryString = require './query_string'
 AlphaVantageTimeSeriesDaily = require './alpha_vantage/time_series_daily'
+AlphaVantageErrorMessage    = require './alpha_vantage/error_message'
 AlphaVantageSlackMessage    = require './alpha_vantage/slack_message'
 
 class AlphaVantage
@@ -22,7 +23,7 @@ class AlphaVantage
       .get() (error, response, body) ->
         result = JSON.parse(body)
         if result.hasOwnProperty('Error Message')
-          callback(attachments: [{ color: '#ff0000', title: 'Error Message', text: result['Error Message'] }])
+          callback(new AlphaVantageErrorMessage(result))
         else
           outline = new AlphaVantageTimeSeriesDaily(result).outline()
           callback(new AlphaVantageSlackMessage(outline))

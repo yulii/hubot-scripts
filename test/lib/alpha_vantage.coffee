@@ -5,6 +5,7 @@ sinon  = require('sinon')
 
 Robot = require('hubot/src/robot')
 AlphaVantageSlackMessage = require '../../lib/alpha_vantage/slack_message'
+AlphaVantageErrorMessage = require '../../lib/alpha_vantage/error_message'
 AlphaVantage = require(source)
 describe 'AlphaVantage', ->
 
@@ -37,9 +38,18 @@ describe 'AlphaVantage', ->
     afterEach ->
       robot.http.restore()
 
-    it 'returns an instance with default values', () ->
-      http_stub((f) -> f('error', 'response', helper.fixture.time_series_daily))
+    describe 'when response is successful', ->
+      it 'calls callback with a message object ', () ->
+        http_stub((f) -> f('error', 'response', helper.fixture.time_series_daily))
 
-      av = new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL').execute(robot, (message) ->
-        expect(message).to.be.an.instanceof(AlphaVantageSlackMessage)
-      )
+        new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL').execute(robot, (message) ->
+          expect(message).to.be.an.instanceof(AlphaVantageSlackMessage)
+        )
+
+    describe 'when response is failure', ->
+      it 'calls callback with a message object ', () ->
+        http_stub((f) -> f('error', 'response', helper.fixture.error_message))
+
+        new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL').execute(robot, (message) ->
+          expect(message).to.be.an.instanceof(AlphaVantageErrorMessage)
+        )
