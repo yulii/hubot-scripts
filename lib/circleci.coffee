@@ -21,11 +21,7 @@ class CircleCI
     _endpoint = "https://circleci.com/api/v1.1/project/#{@vcsType}/#{@owner}/#{@project}/tree/#{@branch}" unless _endpoint?
     return _endpoint
 
-  notify: (destination) ->
-    @destination = destination
-    return @
-
-  execute: (robot) ->
+  execute: (robot, callback) ->
     params = JSON.stringify(build_parameters: { CIRCLE_JOB: @job, JOB_USER: robot.name })
 
     robot.http("#{@endpoint()}?circle-token=#{@token}")
@@ -34,15 +30,15 @@ class CircleCI
       .post(params) (error, response, body) ->
 
         if error
-          robot.send { room: @destination }, "Encountered an error :( `#{error}`"
+          callback("Encountered an error :( `#{error}`")
           return
 
         if response.statusCode < 200 or response.statusCode >= 300
-          robot.send { room: @destination }, "Request fail :( `#{response.statusCode}: #{response.statusMessage}`"
+          callback("Request fail :( `#{response.statusCode}: #{response.statusMessage}`")
           return
 
         result = JSON.parse(body)
-        robot.send { room: @destination }, "Created a new build! #{result.build_url}"
+        callback("Created a new build! #{result.build_url}")
 
   _assert = ->
     throw new Error('`owner` is required argument')   unless @owner?

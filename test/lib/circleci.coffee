@@ -1,6 +1,8 @@
 helper = require('../test_helper')
 expect = require('chai').expect
+sinon  = require('sinon')
 
+Robot = require('hubot/src/robot')
 CircleCI = helper.require('circleci')
 describe 'CircleCI', ->
 
@@ -60,8 +62,36 @@ describe 'CircleCI', ->
       ci = new CircleCI(owner: 'yulii', job: 'test', project: 'mocha', token: 'circle-token')
       expect(ci.endpoint()).to.equal('https://circleci.com/api/v1.1/project/github/yulii/mocha/tree/master')
 
-  describe '#notify', ->
-    it 'sets `destination` property', () ->
-      ci = new CircleCI(owner: 'yulii', job: 'test', project: 'mocha', token: 'circle-token').notify('address')
-      expect(ci).to.be.an.instanceof(CircleCI)
-      expect(ci).to.have.property('destination', 'address')
+  describe '#execute', ->
+    robot = undefined
+    http_stub = undefined
+
+    beforeEach ->
+      process.env.CIRCLE_TOKEN_EXECUTE = 'circle-project-token'
+      robot = new Robot(null, 'mock-adapter', false, 'hubot')
+      http_stub = (callback) ->
+        sinon.stub(robot, 'http').returns(
+          header: sinon.stub().returnsThis()
+          post: sinon.stub().callsFake((_) -> return callback)
+        )
+
+    afterEach ->
+      delete process.env.CIRCLE_TOKEN_EXECUTE
+      robot.http.restore()
+
+    describe 'when response is successful', ->
+      it 'calls callback with a string ', () ->
+        http_stub((f) -> f(null, 'response', '{ "build_url": "https://build_url" }'))
+
+        new CircleCI(owner: 'yulii', job: 'test', project: 'execute').execute(robot, (message) ->
+          expect(message).to.equal('Created a new build! https://build_url')
+        )
+
+    describe 'when response is failure', ->
+      it 'calls callback with a string', () ->
+        response = { statusCode: 404, statusMessage: 'Not Found' }
+        http_stub((f) -> f(null, response, 'body'))
+
+        new CircleCI(owner: 'yulii', job: 'test', project: 'execute').execute(robot, (message) ->
+          expect(message).to.equal("Request fail :( `#{response.statusCode}: #{response.statusMessage}`")
+        )

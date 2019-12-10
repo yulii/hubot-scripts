@@ -13,6 +13,6 @@ module.exports = (robot) ->
         owner: 'yulii'
         job: msg.match[1]
         project: msg.match[2]
-      ).notify("##{msg.envelope.room}").execute(robot)
+      ).execute(robot, (message) -> msg.send(message))
     catch error
       msg.send "#{error.name}: #{error.message}"

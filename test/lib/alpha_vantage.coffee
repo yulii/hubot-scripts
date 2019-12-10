@@ -39,15 +39,15 @@ describe 'AlphaVantage', ->
 
     describe 'when response is successful', ->
       it 'calls callback with a message object ', () ->
-        http_stub((f) -> f('error', 'response', helper.fixture.time_series_daily))
+        http_stub((f) -> f(null, 'response', helper.fixture.time_series_daily))
 
         new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL').execute(robot, (message) ->
           expect(message).to.be.an.instanceof(AlphaVantageSlackMessage)
         )
 
     describe 'when response is failure', ->
-      it 'calls callback with a message object ', () ->
-        http_stub((f) -> f('error', 'response', helper.fixture.error_message))
+      it 'calls callback with a message object', () ->
+        http_stub((f) -> f(null, 'response', helper.fixture.error_message))
 
         new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL').execute(robot, (message) ->
           expect(message).to.be.an.instanceof(AlphaVantageErrorMessage)

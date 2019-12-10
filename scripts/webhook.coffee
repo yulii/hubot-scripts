@@ -25,10 +25,10 @@ module.exports = (robot) ->
           ['hubot-scripts', 'yulii.github.io'].forEach (name) ->
             try
               new CircleCI(
-                owner: 'yulii'
-                project: name
-                job: 'update'
-              ).notify('#devops').execute(robot)
+                owner: 'yulii', project: name, job: 'update'
+              ).execute(robot, (message) ->
+                robot.send { room: '#devops' }, message
+              )
             catch error
               robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
 
