@@ -3,8 +3,6 @@ expect = require('chai').expect
 sinon  = require('sinon')
 
 Robot = require('hubot/src/robot')
-AlphaVantageSlackMessage = helper.require('alpha_vantage/slack_message')
-AlphaVantageErrorMessage = helper.require('alpha_vantage/error_message')
 AlphaVantage = helper.require('alpha_vantage')
 describe 'AlphaVantage', ->
 
@@ -16,11 +14,8 @@ describe 'AlphaVantage', ->
 
   describe '#new', ->
     it 'returns an instance with default values', () ->
-      av = new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL')
-      expect(av).to.be.an.instanceof(AlphaVantage)
-      expect(av).to.have.property('function', 'FUNCTION')
-      expect(av).to.have.property('symbol',   'SYMBOL')
-      expect(av).to.have.property('token',    'alpha-vantage-key')
+      subject = new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL')
+      expect(subject).to.be.an.instanceof(AlphaVantage)
 
   describe '#execute', ->
     robot = undefined
@@ -38,14 +33,18 @@ describe 'AlphaVantage', ->
       robot.http.restore()
 
     describe 'when response is successful', ->
+      AlphaVantageSlackMessage = helper.require('alpha_vantage/slack_message')
+
       it 'calls callback with a message object ', () ->
         http_stub((f) -> f(null, 'response', helper.fixture.time_series_daily))
 
-        new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL').execute(robot, (message) ->
+        new AlphaVantage(function: 'TIME_SERIES_DAILY', symbol: 'SYMBOL').execute(robot, (message) ->
           expect(message).to.be.an.instanceof(AlphaVantageSlackMessage)
         )
 
     describe 'when response is failure', ->
+      AlphaVantageErrorMessage = helper.require('alpha_vantage/error_message')
+
       it 'calls callback with a message object', () ->
         http_stub((f) -> f(null, 'response', helper.fixture.error_message))
 
