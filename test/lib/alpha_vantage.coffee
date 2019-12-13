@@ -12,11 +12,6 @@ describe 'AlphaVantage', ->
   afterEach ->
     delete process.env.ALPHA_VANTAGE_API_KEY
 
-  describe '#new', ->
-    it 'returns an instance with default values', () ->
-      subject = new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL')
-      expect(subject).to.be.an.instanceof(AlphaVantage)
-
   describe '#execute', ->
     robot = undefined
     http_stub = undefined
@@ -48,6 +43,6 @@ describe 'AlphaVantage', ->
       it 'calls callback with a message object', () ->
         http_stub((f) -> f(null, 'response', helper.fixture.error_message))
 
-        new AlphaVantage(function: 'FUNCTION', symbol: 'SYMBOL').execute(robot, (message) ->
+        new AlphaVantage(function: 'FX_DAILY', symbol: 'SYMBOL').execute(robot, (message) ->
           expect(message).to.be.an.instanceof(AlphaVantageErrorMessage)
         )
