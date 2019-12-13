@@ -1,10 +1,11 @@
 class AlphaVantageFactory
-  _factor = undefined
+  _name   = undefined
 
   constructor: (name) ->
-    _factor = require("./#{name.toLowerCase()}")
+    _name = name.toLowerCase()
 
-  create: (object) ->
-    return new _factor(object)
+  parse: (object) ->
+    _parser = require("./parser/#{_name}")
+    return new _parser(object)
 
 module.exports = AlphaVantageFactory

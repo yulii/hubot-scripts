@@ -5,19 +5,18 @@ sinon  = require('sinon')
 AlphaVantageFactory = helper.require('alpha_vantage/factory')
 describe 'AlphaVantageFactory', ->
 
-  describe '#create', ->
+  describe '#parse', ->
     describe 'with defined function name', ->
-      it 'returns AlphaVantageTimeSeriesDaily object', () ->
-        AlphaVantageTimeSeriesDaily = helper.require('alpha_vantage/time_series_daily')
+      it 'returns AlphaVantageParserTimeSeriesDaily object', () ->
+        AlphaVantageParserTimeSeriesDaily = helper.require('alpha_vantage/parser/time_series_daily')
         object = JSON.parse(helper.fixture.time_series_daily)
 
         subject = new AlphaVantageFactory('TIME_SERIES_DAILY')
-        expect(subject.create(object)).be.an.instanceof(AlphaVantageTimeSeriesDaily)
+        expect(subject.parse(object)).be.an.instanceof(AlphaVantageParserTimeSeriesDaily)
 
-    describe 'with undefined function name', ->
-      it 'returns AlphaVantageFxDaily object', () ->
-        AlphaVantageFxDaily = helper.require('alpha_vantage/fx_daily')
+      it 'returns AlphaVantageParserFxDaily object', () ->
+        AlphaVantageParserFxDaily = helper.require('alpha_vantage/parser/fx_daily')
         object = JSON.parse(helper.fixture.fx_daily)
 
         subject = new AlphaVantageFactory('FX_DAILY')
-        expect(subject.create(object)).be.an.instanceof(AlphaVantageFxDaily)
+        expect(subject.parse(object)).be.an.instanceof(AlphaVantageParserFxDaily)

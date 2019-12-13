@@ -4,6 +4,7 @@ AlphaVantageErrorMessage = require './alpha_vantage/error_message'
 AlphaVantageSlackMessage = require './alpha_vantage/slack_message'
 
 class AlphaVantage
+  _factory  = undefined
   _function = undefined
   _symbol   = undefined
   _token    = undefined
@@ -12,7 +13,7 @@ class AlphaVantage
   constructor: (args) ->
     _function = args.function
     _symbol   = args.symbol
-    _token    = process.env['ALPHA_VANTAGE_API_KEY']
+    _initialize.call @
 
   endpoint: ->
     return _endpoint
@@ -28,7 +29,10 @@ class AlphaVantage
         if result.hasOwnProperty('Error Message')
           callback(new AlphaVantageErrorMessage(result))
         else
-          factor = new AlphaVantageFactory(_function).create(result)
-          callback(new AlphaVantageSlackMessage(factor.outline()))
+          callback(new AlphaVantageSlackMessage(_factory.parse(result).outline()))
+
+  _initialize = ->
+    _factory = new AlphaVantageFactory(_function)
+    _token   = process.env['ALPHA_VANTAGE_API_KEY']
 
 module.exports = AlphaVantage
