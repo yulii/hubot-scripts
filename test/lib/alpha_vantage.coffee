@@ -43,6 +43,6 @@ describe 'AlphaVantage', ->
       it 'calls callback with a message object', () ->
         http_stub((f) -> f(null, 'response', helper.fixture.error_message))
 
-        new AlphaVantage(function: 'FX_DAILY', symbol: 'SYMBOL').execute(robot, (message) ->
+        new AlphaVantage(function: 'FX_DAILY', symbol: 'FROM/TO').execute(robot, (message) ->
           expect(message).to.be.an.instanceof(AlphaVantageErrorMessage)
         )

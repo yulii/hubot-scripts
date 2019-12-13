@@ -16,7 +16,7 @@ describe 'AlphaVantageFactory', ->
 
       it 'returns an instance of AlphaVantageParserFxDaily', () ->
         QueryObject = helper.require('alpha_vantage/query/fx_daily')
-        params = { apikey: 'secret', function: 'func', symbol: 'sym' }
+        params = { apikey: 'secret', function: 'func', symbol: 'from/to' }
 
         subject = new AlphaVantageFactory('FX_DAILY')
         expect(subject.query(params)).be.an.instanceof(QueryObject)
