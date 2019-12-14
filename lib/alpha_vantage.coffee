@@ -14,7 +14,7 @@ class AlphaVantage
     _initialize.call @
 
   execute: (robot, callback) ->
-    robot.http("#{_endpoint}?#{_queryString}")
+    robot.http("#{_endpoint}?#{_queryString()}")
       .header('Content-Type', 'application/json')
       .header('Accept', 'application/json')
       .get() (error, response, body) ->
@@ -27,6 +27,9 @@ class AlphaVantage
   _initialize = ->
     _args.apikey = process.env['ALPHA_VANTAGE_API_KEY']
     _factory     = new AlphaVantageFactory(_args.function)
-    _queryString = _factory.query(_args).build()
+
+  _queryString = ->
+    return HttpQueryString.build(_factory.query(_args).params())
+
 
 module.exports = AlphaVantage

@@ -10,15 +10,15 @@ class AlphaVantageQueryFxDaily
     [@from_symbol, @to_symbol] = params.symbol.split('/')
     _assert.call @
 
-  build: () ->
-    return HttpQueryString.build(
-              apikey: @apikey
-              function: @function
-              from_symbol: @from_symbol
-              to_symbol: @to_symbol
-              outputsize: @outputsize
-              datatype: @datatype
-            )
+  params: () ->
+    return {
+            apikey: @apikey
+            function: @function
+            from_symbol: @from_symbol
+            to_symbol: @to_symbol
+            outputsize: @outputsize
+            datatype: @datatype
+          }
 
   _assert = ->
     throw new Error('`apikey` is required argument')      unless @apikey?
