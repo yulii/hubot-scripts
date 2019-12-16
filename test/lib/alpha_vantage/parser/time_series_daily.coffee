@@ -1,13 +1,13 @@
-helper = require('../../test_helper')
+helper = require('../../../test_helper')
 expect = require('chai').expect
 
-AlphaVantageTimeSeriesDaily = helper.require('alpha_vantage/time_series_daily')
-describe 'AlphaVantageTimeSeriesDaily', ->
+AlphaVantageParserTimeSeriesDaily = helper.require('alpha_vantage/parser/time_series_daily')
+describe 'AlphaVantageParserTimeSeriesDaily', ->
   subject = undefined
 
   beforeEach ->
     object  = JSON.parse(helper.fixture.time_series_daily)
-    subject = new AlphaVantageTimeSeriesDaily(object)
+    subject = new AlphaVantageParserTimeSeriesDaily(object)
 
   describe '#outline', ->
     it 'returns an object', () ->

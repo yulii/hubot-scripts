@@ -1,6 +1,6 @@
 moment = require('moment-timezone')
 
-class AlphaVantageTimeSeriesDaily
+class AlphaVantageParserFxDaily
   _meta        = undefined
   _data        = undefined
   _symbol      = undefined
@@ -9,7 +9,7 @@ class AlphaVantageTimeSeriesDaily
 
   constructor: (object) ->
     _meta  = object['Meta Data']
-    _data  = object['Time Series (Daily)']
+    _data  = object['Time Series FX (Daily)']
 
     _initialize.call @
 
@@ -32,7 +32,7 @@ class AlphaVantageTimeSeriesDaily
       compare: compare
 
   symbol: ->
-    return _symbol
+    return "#{_symbol.from}/#{_symbol.to}"
 
   timezone: ->
     return _timezone
@@ -50,8 +50,8 @@ class AlphaVantageTimeSeriesDaily
     return _round(100 * (@closingPrice(end) - @closingPrice(begin)) / @closingPrice(begin), 2)
 
   _initialize = ->
-    _symbol   = _meta['2. Symbol']
-    _timezone = _meta['5. Time Zone']
+    _symbol   = { from: _meta['2. From Symbol'], to: _meta['3. To Symbol'] }
+    _timezone = _meta['6. Time Zone']
     _ts_keys  = Object.keys(_data).map((x) -> moment.tz(x, _timezone).valueOf()).sort((a, b) -> return (a < b ? 1 : -1))
 
   _key = (timestamp) ->
@@ -61,4 +61,4 @@ class AlphaVantageTimeSeriesDaily
     n = Math.pow(10, digits)
     return Math.round(value * n) / n
 
-module.exports = AlphaVantageTimeSeriesDaily
+module.exports = AlphaVantageParserFxDaily

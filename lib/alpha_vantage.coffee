@@ -1,23 +1,20 @@
 HttpQueryString = require './http/query_string'
-AlphaVantageTimeSeriesDaily = require './alpha_vantage/time_series_daily'
-AlphaVantageErrorMessage    = require './alpha_vantage/error_message'
-AlphaVantageSlackMessage    = require './alpha_vantage/slack_message'
+AlphaVantageFactory      = require './alpha_vantage/factory'
+AlphaVantageErrorMessage = require './alpha_vantage/error_message'
+AlphaVantageSlackMessage = require './alpha_vantage/slack_message'
 
 class AlphaVantage
+  _factory  = undefined
+  _args     = undefined
   _endpoint = 'https://www.alphavantage.co/query'
+  _queryString = undefined
 
   constructor: (args) ->
-    @function = args.function
-    @symbol   = args.symbol
-    @token    = process.env['ALPHA_VANTAGE_API_KEY']
-
-  endpoint: ->
-    return _endpoint
+    _args = args
+    _initialize.call @
 
   execute: (robot, callback) ->
-    queryString = HttpQueryString.build(apikey: @token, function: @function, symbol: @symbol)
-
-    robot.http("#{@endpoint()}?#{queryString}")
+    robot.http("#{_endpoint}?#{_queryString()}")
       .header('Content-Type', 'application/json')
       .header('Accept', 'application/json')
       .get() (error, response, body) ->
@@ -25,8 +22,14 @@ class AlphaVantage
         if result.hasOwnProperty('Error Message')
           callback(new AlphaVantageErrorMessage(result))
         else
-          outline = new AlphaVantageTimeSeriesDaily(result).outline()
-          callback(new AlphaVantageSlackMessage(outline))
+          callback(new AlphaVantageSlackMessage(_factory.parse(result).outline()))
+
+  _initialize = ->
+    _args.apikey = process.env['ALPHA_VANTAGE_API_KEY']
+    _factory     = new AlphaVantageFactory(_args.function)
+
+  _queryString = ->
+    return HttpQueryString.build(_factory.query(_args).params())
 
 
 module.exports = AlphaVantage
