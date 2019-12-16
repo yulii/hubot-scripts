@@ -43,6 +43,16 @@ module.exports = (robot) ->
             catch error
               robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
 
+          ['USD/JPY'].forEach (name) ->
+            try
+              new AlphaVantage(
+                function: 'FX_DAILY', symbol: name
+              ).execute(robot, (message) ->
+                robot.send { room: '#random' }, message.format()
+              )
+            catch error
+              robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
+
         when /wake up!/i.test(req.body.text)
           robot.send { room: '#general' }, "I'm readly for @#{req.body.user_name}"
 

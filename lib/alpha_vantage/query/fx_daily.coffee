@@ -1,5 +1,3 @@
-HttpQueryString = require '../../http/query_string'
-
 class AlphaVantageQueryFxDaily
 
   constructor: (params) ->
@@ -12,13 +10,13 @@ class AlphaVantageQueryFxDaily
 
   params: () ->
     return {
-            apikey: @apikey
-            function: @function
-            from_symbol: @from_symbol
-            to_symbol: @to_symbol
-            outputsize: @outputsize
-            datatype: @datatype
-          }
+      apikey: @apikey
+      function: @function
+      from_symbol: @from_symbol
+      to_symbol: @to_symbol
+      outputsize: @outputsize
+      datatype: @datatype
+    }
 
   _assert = ->
     throw new Error('`apikey` is required argument')      unless @apikey?
