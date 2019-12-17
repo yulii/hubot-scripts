@@ -1,23 +1,22 @@
 moment = require('moment-timezone')
 
 class AlphaVantageSlackMessage
-  _outline = undefined
 
   constructor: (outline) ->
-    _outline = outline
+    @outline = outline
 
   format: ->
     self = AlphaVantageSlackMessage
 
     attachments = []
-    for c in _outline.compare
+    for c in @outline.compare
       attachments.push(
         color: self.color(c.diff),
         text: "#{self.compare(c.diff)} (#{self.compare(c.ratio)}%) at #{self.date(c.timestamp)}"
       )
 
     return {
-      text: "#{self.index(_outline.symbol)} *#{_outline.price}* at #{self.date(_outline.timestamp)}",
+      text: "#{self.index(@outline.symbol)} *#{@outline.price}* at #{self.date(@outline.timestamp)}",
       attachments: attachments,
       mrkdwn: true
     }
