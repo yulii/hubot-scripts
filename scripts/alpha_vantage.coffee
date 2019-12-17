@@ -7,7 +7,7 @@
 AlphaVantage = require '../lib/alpha_vantage'
 
 module.exports = (robot) ->
-  robot.respond /stock ([a-z_0-9^]+)$/i, (msg) ->
+  robot.respond /stock ([a-z_0-9^/]+)$/i, (msg) ->
     try
       new AlphaVantage(
         function: 'TIME_SERIES_DAILY',

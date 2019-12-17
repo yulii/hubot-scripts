@@ -7,7 +7,6 @@ class AlphaVantage
   _factory  = undefined
   _args     = undefined
   _endpoint = 'https://www.alphavantage.co/query'
-  _queryString = undefined
 
   constructor: (args) ->
     _args = args

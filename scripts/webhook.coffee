@@ -33,25 +33,19 @@ module.exports = (robot) ->
               robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
 
         when /show market indexes!/i.test(req.body.text)
-          ['^GSPC', '^DJI', '^N225'].forEach (name) ->
-            try
-              new AlphaVantage(
-                function: 'TIME_SERIES_DAILY', symbol: name
-              ).execute(robot, (message) ->
-                robot.send { room: '#random' }, message.format()
-              )
-            catch error
-              robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
+          indexes = {
+            'TIME_SERIES_DAILY': ['^GSPC', '^DJI', '^N225']
+            'FX_DAILY': ['USD/JPY']
+          }
 
-          ['USD/JPY'].forEach (name) ->
-            try
-              new AlphaVantage(
-                function: 'FX_DAILY', symbol: name
-              ).execute(robot, (message) ->
-                robot.send { room: '#random' }, message.format()
-              )
-            catch error
-              robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
+          for f in indexes
+            for s in indexes[f]
+              try
+                new AlphaVantage(function: f, symbol: s).execute(robot, (message) ->
+                  robot.send { room: '#random' }, message.format()
+                )
+              catch error
+                robot.send { room: '#devops' }, "#{error.name}: #{error.message}"
 
         when /wake up!/i.test(req.body.text)
           robot.send { room: '#general' }, "I'm readly for @#{req.body.user_name}"
