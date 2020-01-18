@@ -20,9 +20,9 @@
   },
   "dependencies": {
     "coffeescript": "^1.12.7",
-    "moment-timezone": "^0.5.27",
     "hubot": "^3.3.2",
-    "hubot-slack": "^4.7.1"
+    "hubot-slack": "^4.7.1",
+    "moment-timezone": "^0.5.27"
   },
   "devDependencies": {
     "chai": "latest",
@@ -30,8 +30,8 @@
     "coffeelint": "latest",
     "coveralls": "latest",
     "hubot-mock-adapter": "latest",
-    "nyc": "latest",
     "mocha": "latest",
+    "nyc": "latest",
     "sinon": "latest"
   },
   "engines": {
