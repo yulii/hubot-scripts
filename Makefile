@@ -4,6 +4,9 @@ setup:
 yarn:
 	docker-compose run app yarn install
 
+yarn-outdated:
+	docker-compose run app yarn outdated
+
 test: yarn
 	docker-compose run app yarn test
 	docker-compose run app yarn lint
