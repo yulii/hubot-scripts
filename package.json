@@ -31,7 +31,7 @@
     "coveralls": "latest",
     "hubot-mock-adapter": "latest",
     "nyc": "latest",
-    "mocha": "^6.2.2",
+    "mocha": "latest",
     "sinon": "latest"
   },
   "engines": {
