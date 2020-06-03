@@ -21,7 +21,7 @@
   "dependencies": {
     "coffeescript": "^1.12.7",
     "hubot": "^3.3.2",
-    "hubot-slack": "^4.7.1",
+    "hubot-slack": "^4.8.0",
     "moment-timezone": "^0.5.31"
   },
   "devDependencies": {
