@@ -41,6 +41,6 @@
   "scripts": {
     "test": "mocha --require coffeescript/register --require coffee-coverage/register-istanbul \"test/**/*.coffee\"",
     "lint": "coffeelint lib/ scripts/ test/",
-    "coverage": "nyc mocha \"test/**/*.coffee\""
+    "coverage": "nyc mocha --require coffeescript/register --require coffee-coverage/register-istanbul \"test/**/*.coffee\""
   }
 }
