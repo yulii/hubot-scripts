@@ -21,8 +21,8 @@
   "dependencies": {
     "coffeescript": "^1.12.7",
     "hubot": "^3.3.2",
-    "hubot-slack": "^4.7.1",
-    "moment-timezone": "^0.5.27"
+    "hubot-slack": "^4.8.0",
+    "moment-timezone": "^0.5.31"
   },
   "devDependencies": {
     "chai": "latest",
@@ -39,8 +39,8 @@
     "npm": ">= 6.0.0"
   },
   "scripts": {
-    "test": "mocha \"test/**/*.coffee\"",
+    "test": "mocha --require coffeescript/register --require coffee-coverage/register-istanbul \"test/**/*.coffee\"",
     "lint": "coffeelint lib/ scripts/ test/",
-    "coverage": "nyc mocha \"test/**/*.coffee\""
+    "coverage": "nyc mocha --require coffeescript/register --require coffee-coverage/register-istanbul \"test/**/*.coffee\""
   }
 }
