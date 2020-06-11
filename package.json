@@ -30,7 +30,7 @@
     "coffeelint": "latest",
     "coveralls": "latest",
     "hubot-mock-adapter": "latest",
-    "mocha": "latest",
+    "mocha": "^7.2.0",
     "nyc": "latest",
     "sinon": "latest"
   },
